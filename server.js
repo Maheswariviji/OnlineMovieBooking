@@ -26,20 +26,16 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function(){
   console.log("Connected to DB");
 });
-var r=require('./routes/reviewRoute');
-var avgratingcrud=require('./routes/avgrating');
+
 var auth =  require('./routes/auth');
 var movieCrud = require('./routes/movie-crud');
 var cityCrud = require('./routes/city-crud');
-//var theatreCrud = require('./routes/theatre-crud');
 var movieInfo=require('./routes/movieInfo');
-//var cityCrud = require('./routes/city-crud');
 var trailerCrud=require('./routes/trailer-crud');
 var threaterCrud=require('./routes/threater-crud');
 var timing=require('./routes/showtime');
 var booking=require('./routes/booking-crud');
 var reviews=require('./routes/review-crud');
-var searchCrud=require('./routes/search-crud');
 var confirmCrud=require('./routes/confim-crud');
 var seatmappingCrud=require('./routes/timemapping-crud');
 
@@ -62,7 +58,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-app.use('/reviewapi', r);
 app.use('/movie', movieCrud);
 app.use('/city', cityCrud);
 //app.use('/theatre', theatreCrud);
@@ -73,10 +68,9 @@ app.use('/showtiming',timing);
 app.use('/movieinfo',movieInfo);
 app.use('/bk',booking);
 app.use('/cmt',reviews);
-app.use('/search',searchCrud);
 app.use('/pay',confirmCrud);
 app.use('/st',seatmappingCrud);
-app.use('/avg',avgratingcrud);
+
 
 
 app.get('/', function(req, res) {
